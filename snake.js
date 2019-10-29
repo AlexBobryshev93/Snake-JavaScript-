@@ -5,7 +5,7 @@ const foodImg = new Image();
 const sectionImg = new Image();
 const box = 32; // square size (pxl)
 let score = 0;
-let game = setInterval(drawGame, 100); // game speed
+let game = setInterval(drawGame, 110); // game speed
 let snake = [];
 let direction;
 let food = {
@@ -56,7 +56,7 @@ function drawGame() {
         x: snakeX,
         y: snakeY
     };
-    selfEating(newHead, snake);
+    checkSelfEating(newHead, snake);
     snake.unshift(newHead);
 }
 
@@ -67,7 +67,7 @@ function changeDirection(event) {
     else if ((event.keyCode == 40 || event.keyCode == 83) && direction != "UP") direction = "DOWN";
 }
 
-function selfEating(head, snake) {
+function checkSelfEating(head, snake) {
     for (let i = 0; i < snake.length; i++) {
         if (head.x == snake[i].x && head.y == snake[i].y) gameOver();
     }
@@ -94,3 +94,4 @@ function gameOver() {
     context.fillText("Oooops...Game over...", box * 7, box * 2);
     clearInterval(game);
 }
+
